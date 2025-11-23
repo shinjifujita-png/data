@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<title>Vue.js</title>
+</head>
+<body>
+  <div id="app">
+    <p>{{ message }}</p>
+    <p>{{ Math.abs(-10) }}</p>
+    <p>{{ 5 + 3 }}</p>
+    <!-- <p>{{ let data = 13; }}</p> -->
+    <!-- <p>{{ data }}</p> -->
+    <!-- <p>{{ if(flag) {return data;} }}</p> -->
+    <p>{{ flag ? data : 0 }}</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.2.29/dist/vue.global.js"></script>
+  <script>window.Vue || document.write('<script src="lib/vue.global.prod.jp"><\/script>');</script>
+  <script src="js/hello.js"></script>
+</body>
+</html>
