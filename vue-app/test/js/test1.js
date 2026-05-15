@@ -28,7 +28,7 @@ const MyChild = {
     `,
   data() {
     return {
-      titletest: this.title + 'bbb'
+      titletest: this.title + '追加文字テスト２'
     }
   }
 };
@@ -54,11 +54,11 @@ const MyParent = {
     'my-childtest3': MyChildtest3,
     'my-my': MyMy,
   },
-  template: `<div>こんにちは、{{yourName1}}{{yourName2}}{{testMoji1}}さん!_{{current}}_{{name}}
+  template: `<div>こんにちは、{{yourName1}}{{yourName2}}{{testMoji1}}!_{{current}}_{{name}}
+  <input type="button" v-on:click="onclick" value="CountUp" />
     <my-childtest2 />
     <my-childtest3 />
     <my-my/>
-    <input type="button" v-on:click="onclick" value="増やす" />
     </div>`,
   //プロパティ
   //値を引き渡す
@@ -98,7 +98,7 @@ const MyParent = {
     return {
       current: this.init,
       // current2: this.init 全体のreturnの例
-      title: 'dataVue3実践入門'
+      title: 'リアクティブな値の引き渡し'
     };
   },
   methods: {
@@ -112,7 +112,7 @@ const MyParent = {
   // },
   provide() {
     return {
-      title: this.title + 'aaa'
+      title: this.title + '追加文字テスト'
     }
   },
 };
@@ -180,7 +180,7 @@ const MySlot = {
   template: `
     <div id="child2">
     <p>MySlot_test</p>
-    aaaaa,<slot>guest</slot>bbbbb!
+    slotの前<slot>guest</slot>slotの後
     </div>
     `,
 };
@@ -206,7 +206,7 @@ const MySlot3 = {
     return {
       bookb: {
         isbn: '978-4-8222-5389-9',
-        title: '作って楽しむプログラミング HTML5超入門 ',
+        title: 'スコープ付きスロットの練習 ',
         price: 2000,
         publish: '日経BP'
       }

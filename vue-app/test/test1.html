@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Vue.js</title>
+  <title>Vue.jsコンポーネントの基礎</title>
 </head>
 
 <body>
@@ -12,27 +12,27 @@
   v-bindはjavascriptの式のためシングルクオーテーションを使う 
   :init=0はv-bindで数値を使える,your-name1属性はケバブケース
   -->
-    <my-parent :init=0 your-name1="fujita" your-name2="shinji" v-bind:test-moji1="'aaabbb'"></my-parent>
+    <my-parent :init=0 your-name1="テスト" your-name2="コンポーネント" v-bind:test-moji1="'実行OK'"></my-parent>
+    <!-- アプリインスタンス（ルートコンポーネント？）に値を渡す -->
+    <p>現在値：{{current}}</p>
     <!-- emitsの値がonplusに渡される -->
     <!-- v-on:vnode-mounted,コンポーネントがページに紐づいた後、描画 -->
     <my-counter step="1" v-on:plus-minus="onplus" v-on:vnode-mounted="onmounted"></my-counter>
     <my-counter step="2" v-on:plus-minus="onplus"></my-counter>
     <my-counter step="-1" v-on:plus-minus="onplus"></my-counter>
-    <!-- アプリインスタンス（ルートコンポーネント？）に値を渡す -->
-    <p>現在値：{{current}}</p>
     <my-update></my-update>
-    <my-slot>slot_test</my-slot>
+    <my-slot>呼び出し側のコンテンツ</my-slot>
     <my-slot2>
       <template v-slot:header>
-        <h3>ようこそVue.jsへ</h3>
+        <h3>複数スロットのヘッダー</h3>
       </template>
       <!-- name="default"とみなす -->
-      <p>一緒に勉強しましょう。</p>
+      <p>defaultスロットの文字列１</p>
       <template #footer>
-        <span>Written by WINGSプロジェクト</span>
+        <span>複数スロットのフッター</span>
       </template>
       <!-- name="default"とみなす -->
-      <p>質問は掲示板へどうぞ</p>
+      <p>defaultスロットの文字列２</p>
     </my-slot2>
     <my-slot3 v-slot:ccc="slotProp">
       <!-- 「スコープ付きスロット」、子コンポーネントの値を参照できる,templateはv-slotが一つなので省略可 -->
