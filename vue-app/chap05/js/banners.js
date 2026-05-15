@@ -1,6 +1,7 @@
 Vue
   .createApp({
     created() {
+      //thisこのコンポーネント全体で使えるようにする
       this.interval = setInterval(() => {
         this.current = (this.current + 1) % this.components.length;
       }, 3000);

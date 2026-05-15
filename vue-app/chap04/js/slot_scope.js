@@ -2,7 +2,7 @@ Vue.createApp({})
   .component('my-book', {
     data() {
       return {
-        book: {
+        bookb: {
           isbn: '978-4-8222-5389-9',
           title: '作って楽しむプログラミング HTML5超入門 ',
           price: 2000,
@@ -12,7 +12,7 @@ Vue.createApp({})
     },
     template: `<div>
       <!--<slot>{{book.title}}（{{book.publish}}）</slot>-->
-      <slot v-bind:book="book">{{book.title}}（{{book.publish}}）</slot>
+      <slot v-bind:booka="bookb">{{bookb.title}}（{{bookb.publish}}）</slot>
     </div>`
   })
   .mount('#app');

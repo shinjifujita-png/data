@@ -6,10 +6,11 @@
 </head>
 <body>
 <div id="app">
-  <template v-for="s in songs">
-    <header>{{ s.title }}</header>
-    <div>{{ s.lyrics }}</div>
-    <footer>{{ s.composer }} 作曲</footer>
+  <!-- <template v-for="s in songs"> -->
+  <template v-if="songs[0].title">
+    <header>{{ songs[0].title }}</header>
+    <div>{{ songs[0].lyrics }}</div>
+    <footer>{{ songs[0].composer }} 作曲</footer>
   </template>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@3.2.29/dist/vue.global.js"></script>

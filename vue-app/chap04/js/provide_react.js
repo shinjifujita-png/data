@@ -7,7 +7,7 @@ Vue.createApp({})
     },    
     provide() {
       return {
-        title: Vue.computed(() => this.title)
+        titlea: Vue.computed(() => this.title)
       }
     },
     template: `
@@ -25,10 +25,10 @@ Vue.createApp({})
     `
   })
   .component('my-child', {
-    inject: ['title'],
+    inject: ['titlea'],
     template: `
       <div id="child">
-        {{ title.value }}
+        {{ titlea.value }}
       </div>
     `
   })

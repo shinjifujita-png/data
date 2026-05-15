@@ -6,7 +6,7 @@ Vue.createApp({
   },
   mounted() {
     this.message = 'はじめまして、Vue.js！';
-    // console.log(this.$el.textContent.includes(this.message));
+    console.log(this.$el.textContent.includes(this.message));
 
     this.$nextTick(() => {
       console.log(this.$el.textContent.includes(this.message));

@@ -8,19 +8,20 @@ Vue
     methods: {
       onclick(e) {
         this.current += Number(e.target.textContent);
+        // console.log(e)
       },
     }
   })
   .component('my-counter', {
-    // inheritAttrs: false,
+    inheritAttrs: true,
     props: [ 'step' ], 
-    emits: [ 'plusMinus' ],
+    // emits: [ 'plusMinus' ],
     template: `<button type="button" v-on:click="onclick">
     {{ step }}</button>`,
-    methods: {
-      onclick() {
-        this.$emit('plusMinus', Number(this.step));
-      }
-    }
+    // methods: {
+    //   onclick() {
+    //     this.$emit('aa', Number(this.step));
+    //   }
+    // }
   })
 .mount('#app');

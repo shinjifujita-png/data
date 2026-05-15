@@ -9,8 +9,11 @@
   <my-book>
     <!-- {{book.title}}（{{book.price}}円） -->
     
-    <template v-slot:default="slotProp">
+    <!-- <template v-slot:default="slotProp">
       {{slotProp.book.title}}（{{slotProp.book.price}}円）
+    </template> -->
+    <template v-slot:default="slotPropa">
+      {{slotPropa.booka.title}}（{{slotPropa.booka.price}}円）
     </template>
   </my-book>
 </div>

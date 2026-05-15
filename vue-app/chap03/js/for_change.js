@@ -6,8 +6,8 @@ Vue.createApp({
   },
   methods: {
     onclick() {
-      this.list[1] = '茶パジャマ';
-      // this.list.shift();      
+      // this.list[1] = '茶パジャマ';
+      this.list.shift();      
     }
   }
 }).mount('#app');

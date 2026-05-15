@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Vue.js</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- コンポーネントタグ 
+  v-bindはjavascriptの式のためシングルクオーテーションを使う 
+  :init=0はv-bindで数値を使える,your-name1属性はケバブケース
+  -->
+    <my-parent :init=0 your-name1="fujita" your-name2="shinji" v-bind:test-moji1="'aaabbb'"></my-parent>
+    <!-- emitsの値がonplusに渡される -->
+    <!-- v-on:vnode-mounted,コンポーネントがページに紐づいた後、描画 -->
+    <my-counter step="1" v-on:plus-minus="onplus" v-on:vnode-mounted="onmounted"></my-counter>
+    <my-counter step="2" v-on:plus-minus="onplus"></my-counter>
+    <my-counter step="-1" v-on:plus-minus="onplus"></my-counter>
+    <!-- アプリインスタンス（ルートコンポーネント？）に値を渡す -->
+    <p>現在値：{{current}}</p>
+    <my-update></my-update>
+    <my-slot>slot_test</my-slot>
+    <my-slot2>
+      <template v-slot:header>
+        <h3>ようこそVue.jsへ</h3>
+      </template>
+      <!-- name="default"とみなす -->
+      <p>一緒に勉強しましょう。</p>
+      <template #footer>
+        <span>Written by WINGSプロジェクト</span>
+      </template>
+      <!-- name="default"とみなす -->
+      <p>質問は掲示板へどうぞ</p>
+    </my-slot2>
+    <my-slot3 v-slot:ccc="slotProp">
+      <!-- 「スコープ付きスロット」、子コンポーネントの値を参照できる,templateはv-slotが一つなので省略可 -->
+      <!-- <template v-slot:ccc="slotProp"> -->
+        {{slotProp.booka.title}}（{{slotProp.booka.price}}円）
+      <!-- </template> -->
+    </my-slot3>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.2.29/dist/vue.global.js"></script>
+  <script src="js/test1.js"></script>
+</body>
+
+</html>

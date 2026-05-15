@@ -9,12 +9,13 @@
 <div id="app">
   <div id="parent" v-on:click="onParentClick">
   <!-- <div id="parent" v-on:click.capture="onParentClick"> -->
+  <!-- <div id="parent" v-on:click.capture.stop="onParentClick"> -->
     親要素
-    <div id="my" v-on:click="onMyClick">
+    <!-- <div id="my" v-on:click="onMyClick"> -->
     <!-- <div id="my" v-on:click.self="onMyClick"> -->
     <!-- <div id="my" v-on:click.capture="onMyClick"> -->
     <!-- <div id="my" v-on:click.stop.self="onMyClick"> -->
-    <!-- <div id="my" v-on:click.self.stop="onMyClick"> -->
+    <div id="my" v-on:click.self.stop="onMyClick">
       現在要素
       <div id="child" v-on:click="onChildClick">
       <!-- <div id="child" v-on:click.stop="onChildClick"> -->

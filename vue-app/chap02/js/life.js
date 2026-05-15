@@ -28,5 +28,7 @@ const app = Vue.createApp({
 app.mount('#app');
 
 setTimeout(function() {
+  console.log('test111_setTimeout');
   app.unmount();
+  console.log('test222_setTimeout');
 }, 3000);
