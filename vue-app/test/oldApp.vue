@@ -1,7 +1,7 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
-import WorkFlow from './components/WorkFlow.vue'
+import TierList from './components/TierList.vue'
 </script>
 
 <template>
@@ -14,7 +14,7 @@ import WorkFlow from './components/WorkFlow.vue'
   </header>
 
   <main>
-    <WorkFlow />
+    <TierList />
   </main>
 
 </template>
