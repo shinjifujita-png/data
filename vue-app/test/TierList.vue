@@ -56,7 +56,7 @@ const tierRows = ref([
   { rank: 'A', color: '#ffbf7f', items: [] },
   { rank: 'B', color: '#ffdf7f', items: [] },
   { rank: 'C', color: '#ffff7f', items: [] },
-  { rank: 'D', color: '#ffff9f', items: [] },
+  { rank: 'D', color: '#fcfbcc', items: [] },
 ])
 
 // まだ配置されていないアイテムの初期データ
