@@ -10,10 +10,11 @@ import WorkflowBoard from './components/WorkflowBoard.vue'
 
 <style>
 body {
-  margin: 0;
+  margin: 0px;
   background-color: #f1f5f9;
 }
 main {
-  padding: 24px;
+  margin: 0px;
+  padding: 0px;
 }
 </style>
