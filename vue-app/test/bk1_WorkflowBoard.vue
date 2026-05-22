@@ -83,9 +83,6 @@
           <label>テキスト（名前）</label>
           <input type="text" v-model="selectedNode.text" class="prop-input" />
 
-          <label>説明（メモ）</label>
-          <textarea v-model="selectedNode.description" class="prop-textarea" placeholder="このステップの詳細や手順を入力..."></textarea>
-
           <label>背景色変更</label>
           <input type="color" v-model="selectedNode.color" class="prop-color" />
           
@@ -101,9 +98,6 @@
           
           <label>ラベルテキスト</label>
           <input type="text" v-model="selectedLink.text" class="prop-input" />
-
-          <label>説明（遷移条件など）</label>
-          <textarea v-model="selectedLink.description" class="prop-textarea" placeholder="この分岐や矢印が選ばれる条件を入力..."></textarea>
 
           <label>線の色</label>
           <input type="color" v-model="selectedLink.color" class="prop-color" />
@@ -137,10 +131,6 @@
             {{ link.timestamp }}
           </span>
 
-          <div v-if="link.description" class="list-description">
-            {{ link.description }}
-          </div>
-
           <br />
 
           <span class="node-badge">
@@ -170,7 +160,7 @@ const selectedFromNodeId = ref(null)
 const draggingNode = ref(null)
 let offset = { x: 0, y: 0 }
 
-// 選択中の要素を管理する状態
+// 💡 選択中の要素を管理する状態
 const selectedNode = ref(null)
 const selectedLink = ref(null)
 
@@ -181,17 +171,18 @@ const addNode = (type) => {
   
   if (type === 'start') {
     defaultLabel = '開始'
-    defaultColor = '#e0e7ff'
+    defaultColor = '#e0e7ff' // 開始（薄青）
   }
   if (type === 'task') {
     defaultLabel = `タスク ${nextId.value}`
-    defaultColor = '#eff6ff'
+    defaultColor = '#eff6ff' // 通常タスク（白・薄青）
   }
   if (type === 'condition') {
     defaultLabel = '条件分岐'
-    defaultColor = '#fef3c7'
+    defaultColor = '#fef3c7' // 分岐（薄黄）
   }
 
+  // 💬 ポップアップでの入力
   const userInput = prompt('ラベルを入力してください：', defaultLabel)
   if (userInput === null) return
   const label = userInput.trim() === '' ? defaultLabel : userInput
@@ -202,13 +193,13 @@ const addNode = (type) => {
     x: 100 + (nodes.value.length * 15),
     y: 150,
     text: label,
-    color: defaultColor,
-    description: '' // 💡 初期値として空文字を追加
+    color: defaultColor // 💡 初期カラーを設定
   }
 
   nodes.value.push(newNode)
   nextId.value++
   
+  // 作成したノードを自動選択
   selectNode(newNode)
 }
 
@@ -238,7 +229,7 @@ const toggleConnectMode = () => {
 
 // 3. ノードクリック時
 const onMouseDownNode = (event, node) => {
-  selectNode(node)
+  selectNode(node) // 💡 クリック時にプロパティ対象として選択
 
   if (isConnectMode.value) {
     if (!selectedFromNodeId.value) {
@@ -255,11 +246,10 @@ const onMouseDownNode = (event, node) => {
             text: linkLabel || '',
             checked: false,
             timestamp: '',
-            color: '#6366f1',
-            description: '' // 💡 初期値として空文字を追加
+            color: '#6366f1' // 💡 矢印の初期カラー
           }
           links.value.push(newLink)
-          selectLink(newLink)
+          selectLink(newLink) // 繋いだ矢印を選択状態にする
         }
       }
       selectedFromNodeId.value = null
@@ -294,9 +284,9 @@ const getNodeCenter = (id) => {
   }
 }
 
-// 7. ノードのカラー取得
+// 7. ノードのカラー取得（プロパティで変更された色、または選択中カラー）
 const getNodeColor = (node) => {
-  if (selectedFromNodeId.value === node.id) return '#fecaca'
+  if (selectedFromNodeId.value === node.id) return '#fecaca' // 接続選択中（薄赤）
   return node.color || '#eff6ff'
 }
 
@@ -343,7 +333,7 @@ const clearBoard = () => {
 
 <style scoped>
 .workflow-container {
-  max-width: 1400px;
+  max-width: 1400px; /* 💡 右パネルが増えたので全体の最大幅を拡張 */
   margin: 0 auto;
   font-family: sans-serif;
 }
@@ -353,7 +343,7 @@ h1 {
   color: #1f2937;
 }
 
-/* メインレイアウトを左右に分割 */
+/* 💡 メインレイアウトを左右に分割 */
 .main-layout {
   display: flex;
   gap: 20px;
@@ -361,11 +351,11 @@ h1 {
 }
 
 .left-panel {
-  flex: 1;
+  flex: 1; /* 左側は引き伸ばす */
   min-width: 0;
 }
 
-/* プロパティパネルの装飾 */
+/* 💡 プロパティパネルの装飾 */
 .property-panel {
   width: 320px;
   background-color: #f8fafc;
@@ -373,10 +363,8 @@ h1 {
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
-  height: 565px; /* プロパティ項目が増えたため、中身がはみ出さないよう調整 */
+  height: 565px; /* ツールバーとSVGを合わせた高さに近く固定 */
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
 }
 
 .property-panel h3 {
@@ -391,8 +379,6 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  overflow-y: auto; /* 万が一入力欄が増えてもスクロールできるように */
-  flex: 1;
 }
 
 .property-group label {
@@ -411,29 +397,14 @@ h1 {
   box-sizing: border-box;
 }
 
-.prop-input:focus,
-.prop-textarea:focus {
+.prop-input:focus {
   outline: none;
   border-color: #6366f1;
 }
 
-/* 💡 追加：説明用テキストエリアのスタイル */
-.prop-textarea {
-  padding: 8px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  font-size: 13px;
-  font-family: sans-serif;
-  width: 100%;
-  height: 80px; /* テキストエリアの初期の高さ */
-  resize: vertical; /* ユーザーが上下に高さを広げられるように設定 */
-  box-sizing: border-box;
-  line-height: 1.4;
-}
-
 .prop-color {
   width: 100%;
-  height: 35px;
+  height: 40px;
   border: 1px solid #cbd5e1;
   border-radius: 6px;
   cursor: pointer;
@@ -453,14 +424,14 @@ h1 {
 .link-type-badge { background-color: #e0e7ff; color: #3730a3; }
 
 .info-text {
-  margin-top: 10px;
-  padding-top: 8px;
+  margin-top: 15px;
+  padding-top: 10px;
   border-top: 1px dashed #cbd5e1;
   font-size: 12px;
   color: #64748b;
-  line-height: 1.5;
+  line-height: 1.6;
 }
-.info-text p { margin: 2px 0; }
+.info-text p { margin: 4px 0; }
 
 .no-selection {
   color: #94a3b8;
@@ -472,7 +443,7 @@ h1 {
 
 /* 選択された矢印の強調スタイル */
 .selected-element {
-  stroke: #10b981 !important;
+  stroke: #10b981 !important; /* 選択中は緑色に */
   stroke-width: 4px;
 }
 
@@ -590,17 +561,6 @@ svg { display: block; }
 .link-list li.is-checked {
   background-color: #f0fdf4;
   border-color: #86efac;
-}
-
-/* 💡 追加：タイムライン用の説明文スタイル */
-.list-description {
-  font-size: 12px;
-  color: #64748b;
-  background-color: #f8fafc;
-  padding: 4px 8px;
-  border-radius: 4px;
-  margin: 4px 0;
-  border-left: 3px solid #cbd5e1;
 }
 
 .node-badge {
